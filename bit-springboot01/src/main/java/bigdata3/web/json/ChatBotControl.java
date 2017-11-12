@@ -24,7 +24,7 @@ public class ChatBotControl {
                                  @RequestParam String senderID) throws Exception {
 
     HashMap<String,String> dataMap = new HashMap<>();
-    dataMap.put("senerID", senderID);
+    dataMap.put("senderID", senderID);
     dataMap.put("state", state);
 
     if (state.equals("on")) {
