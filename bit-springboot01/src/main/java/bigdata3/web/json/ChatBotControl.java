@@ -20,8 +20,9 @@ public class ChatBotControl {
   @Autowired ServletContext application;
 
   @RequestMapping("led/{state}")
-  public Object setLED(@PathVariable String state,
-                                 @RequestParam String senderID) throws Exception {
+  public Object setLED(
+      @PathVariable String state,
+      @RequestParam String senderID) throws Exception {
 
     HashMap<String,String> dataMap = new HashMap<>();
     dataMap.put("senderID", senderID);
