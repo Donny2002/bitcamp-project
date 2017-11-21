@@ -24,11 +24,10 @@ const handleReceiveMessage = (event) => {
 const handleReceivePostback = (event) => {
   console.log('=========> postback');
 
-
-  function receivedPostback(event) {
     var senderID = event.sender.id;
     var recipientID = event.recipient.id;
     var timeOfPostback = event.timestamp;
+    var payload = event.postback.payload;
 
     console.log("Received postback for user %d and page %d with payload '%s' " +
       "at %d", senderID, recipientID, payload, timeOfPostback);
@@ -38,7 +37,6 @@ const handleReceivePostback = (event) => {
     } else if (payload == "led_off") {
       sendAPI.sendTextMessage(senderID, "전구를 끄겠습니다");
     }
-  }
 };
 
 module.exports = {
