@@ -45,7 +45,7 @@ const searchNewAddress = (type, searchWord, callback) => { // callback: 작업�
             message += addr.lnmAdres[0] + ']\n';
             message += ']\n';
         }
-        callback();
+        callback(message);
     });
   });
 };
