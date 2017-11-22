@@ -1,5 +1,4 @@
 const request = require('request');
-require('dotenv').config({path:"/home/ec2-user/vars/.env"})
 
 const searchNewAddress = (type, searchWord) => {
 
@@ -26,9 +25,8 @@ const searchNewAddress = (type, searchWord) => {
     console.log('=> Reponse received', body);
   });
 };
-searchNewAddress('post','17072');
-/*
+//searchNewAddress('post','17072');
+
 module.exports = {
     searchNewAddress
 };
-*/

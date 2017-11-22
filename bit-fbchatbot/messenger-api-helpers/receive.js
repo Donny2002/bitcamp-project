@@ -1,4 +1,5 @@
 const sendAPI = require('./send');
+const openAPI = require('../rest-api/openapi')
 
 const handleReceiveMessage = (event) => {
   var senderID = event.sender.id;
@@ -16,26 +17,34 @@ const handleReceiveMessage = (event) => {
 
   if (messageText == 'led') {
     sendAPI.sendLedMessage(senderID);
+  } else if (messageText.startWith('searchAddress')) {
+    try {
+      var arr = messageText.split(':')[1].split('=');
+      openAPI.searchNewAddress(arr[0], arr[1])
+    } catch (err) {
+      console.log(err);
+    }
   } else {
     sendAPI.sendTextMessage(senderID, messageText);
   }
+
 };
 
 const handleReceivePostback = (event) => {
 
-    var senderID = event.sender.id;
-    var recipientID = event.recipient.id;
-    var timeOfPostback = event.timestamp;
-    var payload = event.postback.payload;
+  var senderID = event.sender.id;
+  var recipientID = event.recipient.id;
+  var timeOfPostback = event.timestamp;
+  var payload = event.postback.payload;
 
-    console.log("Received postback for user %d and page %d with payload '%s' " +
-      "at %d", senderID, recipientID, payload, timeOfPostback);
+  console.log("Received postback for user %d and page %d with payload '%s' " +
+    "at %d", senderID, recipientID, payload, timeOfPostback);
 
-    if (payload == "led_on") {
-      sendAPI.sendTextMessage(senderID, "전구를 켜겠습니다");
-    } else if (payload == "led_off") {
-      sendAPI.sendTextMessage(senderID, "전구를 끄겠습니다");
-    }
+  if (payload == "led_on") {
+    sendAPI.sendTextMessage(senderID, "전구를 켜겠습니다");
+  } else if (payload == "led_off") {
+    sendAPI.sendTextMessage(senderID, "전구를 끄겠습니다");
+  }
 };
 
 module.exports = {
