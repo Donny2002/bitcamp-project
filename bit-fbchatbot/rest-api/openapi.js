@@ -1,6 +1,7 @@
 const request = require('request');
+const parseString = require('xml2js').parseString;
 
-const searchNewAddress = (type, searchWord) => {
+const searchNewAddress = (type, searchWord, callback) => { // callback: 작업을 끝낸 다음에 호출해야 하는 함수
 
   var uri = 'http://openapi.epost.go.kr/postal/retrieveNewAdressAreaCdService/retrieveNewAdressAreaCdService/getNewAddressListAreaCd';
 
@@ -20,9 +21,32 @@ const searchNewAddress = (type, searchWord) => {
   request({
     uri: uri + queryString,
   }, function(error, response, body) {
-    console.log('=> Status', response.statusCode);
-    console.log('=> Headers', JSON.stringify(response.headers));
+    //console.log('=> Status', response.statusCode);
+    //console.log('=> Headers', JSON.stringify(response.headers));
     console.log('=> Reponse received', body);
+
+    parseString(body, (err, result) => { // xml이 body로 변경!
+        var headers = result.NewAddressListResponse.cmmMsgHeader[0];
+        var totalCount = headers.totalCount[0];
+        var countPerPage = headers.countPerPage[0];
+        var currentPage = headers.currentPage[0];
+
+        console.log('[주소검색결과]');
+        console.log(totalCount);
+        console.log(countPerPage);
+        console.log(currentPage);
+        console.log('------------------------------');
+
+        var sendAPI
+        var addrList = result.NewAddressListResponse.newAddressListAreaCd;
+        for (var addr of addrList) {
+            message += '[' + addr.zipNo[0] + ']\n';
+            message += addr.rnAdres[0] + ']\n';
+            message += addr.lnmAdres[0] + ']\n';
+            message += ']\n';
+        }
+        callback();
+    });
   });
 };
 //searchNewAddress('post','17072');
