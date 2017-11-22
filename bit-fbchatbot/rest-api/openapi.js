@@ -37,7 +37,7 @@ const searchNewAddress = (type, searchWord, callback) => { // callback: 작업�
         console.log(currentPage);
         console.log('------------------------------');
 
-        var sendAPI = '';
+        var message = '';
         var addrList = result.NewAddressListResponse.newAddressListAreaCd;
         for (var addr of addrList) {
             message += '[' + addr.zipNo[0] + ']\n';
