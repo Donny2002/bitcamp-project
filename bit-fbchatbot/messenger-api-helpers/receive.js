@@ -22,7 +22,6 @@ const handleReceiveMessage = (event) => {
 };
 
 const handleReceivePostback = (event) => {
-  console.log('=========> postback');
 
     var senderID = event.sender.id;
     var recipientID = event.recipient.id;

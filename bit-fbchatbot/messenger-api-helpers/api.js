@@ -22,7 +22,7 @@ const callMessagesAPI = (messageData) => {
       console.error(error);
     }
   });
-}
+};
 
 module.exports = {
   callMessagesAPI
