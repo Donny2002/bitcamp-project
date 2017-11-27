@@ -45,8 +45,10 @@ const handleReceivePostback = (event) => {
     "at %d", senderID, recipientID, payload, timeOfPostback);
 
 var menu = global[senderID].menu;
-if(menu == 'help') {
+if (menu == 'help') {
   menuHelp(senderID, payload);
+} else if (menu == 'led') {
+    menuLed(senderID, payload);
 }
 /*
   if (payload == "led_on") {
@@ -58,12 +60,22 @@ if(menu == 'help') {
 };
 
 const menuHelp = (senderID, payload) => {
-  if(payload == 'menu_led') {
-    console.log('LED 메뉴를 눌렀네요!');
-  } else if(payload == 'menu_calc') {
+  if (payload == 'menu_led') {
+    sendAPI.sendLedMessage(senderID);
+    global[senderID].menu = 'led'; // 이 사용자의 현재 메뉴는 'LED 스위치' 이다.
+  } else if (payload == 'menu_calc') {
     console.log('계산기 메뉴를 눌렀네요!');
-  } else if(payload == 'menu_addr'){
+  } else if (payload == 'menu_addr'){
     console.log('주소검색 메뉴를 눌렀네요!');
+  }
+};
+
+const menuLed = (senderID, payload) => {
+  if (payload == 'led_on') {
+    sendAPI.sendTextMessage(senderID, 'LED를 켭니다.');
+
+  } else if (payload == 'led_off') {
+    sendAPI.sendTextMessage(senderID, 'LED를 끕니다.');
   }
 };
 

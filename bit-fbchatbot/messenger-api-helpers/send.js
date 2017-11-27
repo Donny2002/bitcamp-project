@@ -111,15 +111,15 @@ const sendLedMessage = (recipientId) => {
         "type": "template",
         "payload": {
           "template_type": "button",
-          "text": "LED 동작 제어!",
+          "text": "LED 스위치!",
           "buttons": [{
               "type": "postback",
-              "title": "Led ON",
+              "title": "ON",
               "payload": "led_on"
             },
             {
               "type": "postback",
-              "title": "Led OFF",
+              "title": "OFF",
               "payload": "led_off"
             }
           ]
