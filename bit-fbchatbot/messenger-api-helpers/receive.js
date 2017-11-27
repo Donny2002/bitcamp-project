@@ -15,9 +15,10 @@ const handleReceiveMessage = (event) => {
   var messageText = message.text;
   var messageAttachments = message.attachments; // 사진이나 음성 관련
 
+  console.log('user ======> ', global[senderID].user);
+  
   if (messageText == 'help') {
     sendAPI.sendMenuMessage(senderID);
-    console.log('user ======> ', global[senderID].user);
   } else if (messageText.startsWith('searchAddress')) {
     try {
       var arr = messageText.split(':')[1].split('=');
