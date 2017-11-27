@@ -92,6 +92,9 @@ const menuLed = (senderID, payload) => {
 const menuCalc = (senderID, messageText) => {
   try {
   var tokens = messageText.split(' ');
+  if (tokens.length != 3)
+    throw '계산 형식 오류!';
+
   var a = parseInt(tokens[0]);
   var op = tokens[1];
   var b = parseInt(token[2]);
