@@ -26,6 +26,7 @@ const searchNewAddress = (type, searchWord, callback) => { // callback: 작업�
     console.log('=> Reponse received', body);
 
     parseString(body, (err, result) => { // xml이 body로 변경!
+      try {
         var headers = result.NewAddressListResponse.cmmMsgHeader[0];
         var totalCount = headers.totalCount[0];
         var countPerPage = headers.countPerPage[0];
@@ -40,17 +41,20 @@ const searchNewAddress = (type, searchWord, callback) => { // callback: 작업�
         var message = '';
         var addrList = result.NewAddressListResponse.newAddressListAreaCd;
         for (var addr of addrList) {
-            message += '[' + addr.zipNo[0] + ']\n';
-            message += addr.rnAdres[0] + '\n';
-            message += addr.lnmAdres[0] + '\n';
-            message += '\n';
+          message += '[' + addr.zipNo[0] + ']\n';
+          message += addr.rnAdres[0] + '\n';
+          message += addr.lnmAdres[0] + '\n';
+          message += '\n';
         }
         callback(message);
+      } catch (err) {
+          callback('주소 검색을 할 수 없습니다.');
+      }
     });
   });
 };
 //searchNewAddress('post','17072');
 
 module.exports = {
-    searchNewAddress
+  searchNewAddress
 };

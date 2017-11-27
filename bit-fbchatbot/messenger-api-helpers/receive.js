@@ -22,10 +22,10 @@ const handleReceiveMessage = (event) => {
     // 현재 help를 출력한 상태임을 저장한다.
     global[senderID].menu = 'help';
 
-} else if (menu == 'calc') {
+  } else if (menu == 'calc') {
     menuCalc(senderID, messageText);
 
-} else if (menu.startsWith('addr_')) { // 동, 도로명, 우편번호를 검색 한다면,
+  } else if (menu.startsWith('addr_')) { // 동, 도로명, 우편번호를 검색 한다면,
 
     try {
       var type = menu.substring(5);
@@ -53,16 +53,18 @@ const handleReceivePostback = (event) => {
   console.log("Received postback for user %d and page %d with payload '%s' " +
     "at %d", senderID, recipientID, payload, timeOfPostback);
 
-var menu = global[senderID].menu;
+  var menu = global[senderID].menu;
 
-if (menu == 'help') {
-  menuHelp(senderID, payload);
-} else if (menu == 'led') {
+  if (menu == 'help') {
+    menuHelp(senderID, payload);
+  } else if (menu == 'led') {
     menuLed(senderID, payload);
-} else if (menu == 'addr') {
-  menuAddr(senderID, payload);
-}
-
+  } else if (menu == 'addr') {
+    menuAddr(senderID, payload);
+  } else {
+    sendAPI.sendTextMessage(senderID, "메뉴를 다시 요청하세요");
+  }
+};
 /*
   if (payload == "led_on") {
     sendAPI.sendTextMessage(senderID, "전구를 켜겠습니다");
@@ -81,9 +83,9 @@ const menuHelp = (senderID, payload) => {
     sendAPI.sendTextMessage(senderID, '식을 입력하세요. \n예) 2 + 3');
     global[senderID].menu = 'calc'; // 이 사용자의 현재 메뉴는 '계산기' 이다.
 
-  } else if (payload == 'menu_addr'){
+  } else if (payload == 'menu_addr') {
     sendAPI.sendAddressSearchMessage(senderID);
-      global[senderID].menu = 'addr'; // 이 사용자의 메뉴는 '주소검색' 이다.
+    global[senderID].menu = 'addr'; // 이 사용자의 메뉴는 '주소검색' 이다.
   }
 };
 
@@ -96,32 +98,42 @@ const menuLed = (senderID, payload) => {
   }
 };
 
-  // 현재 계산기 메뉴일 때는 사용자가 입력한 값이 계산식이라고 가정하고 메세지를 분석
+// 현재 계산기 메뉴일 때는 사용자가 입력한 값이 계산식이라고 가정하고 메세지를 분석
 const menuCalc = (senderID, messageText) => {
   try {
-  var tokens = messageText.split(' ');
-  if (tokens.length != 3)
-    throw '계산 형식 오류!';
+    var tokens = messageText.split(' ');
+    if (tokens.length != 3)
+      throw '계산 형식 오류!';
 
-  var a = parseInt(tokens[0]);
-  var op = tokens[1];
-  var b = parseInt(token[2]);
-  var result = 0;
-  switch (op) {
-    case '+': result = a + b; break;
-    case '-': result = a - b; break;
-    case '*': result = a * b; break;
-    case '/': result = a / b; break;
-    case '%': result = a % b; break;
-    default:
-      sendAPI.sendTextMessage(senderID,
-      '+, -, *, /, % 연산자만 사용할 수 있습니다.');
-      return;
+    var a = parseInt(tokens[0]);
+    var op = tokens[1];
+    var b = parseInt(token[2]);
+    var result = 0;
+    switch (op) {
+      case '+':
+        result = a + b;
+        break;
+      case '-':
+        result = a - b;
+        break;
+      case '*':
+        result = a * b;
+        break;
+      case '/':
+        result = a / b;
+        break;
+      case '%':
+        result = a % b;
+        break;
+      default:
+        sendAPI.sendTextMessage(senderID,
+          '+, -, *, /, % 연산자만 사용할 수 있습니다.');
+        return;
+    }
+    sendAPI.sendTextMessage(senderID, '계산 결과는' + result + '입니다.');
+  } catch (exception) {
+    sendAPI.sendTextMessage(senderID, '계산식이 맞지 않습니다.\n예)값1 연산자 값2');
   }
-  sendAPI.sendTextMessage(senderID, '계산 결과는' + result + '입니다.');
-} catch (exception) {
-  sendAPI.sendTextMessage(senderID, '계산식이 맞지 않습니다.\n예)값1 연산자 값2');
-}
 };
 
 const menuAddr = (senderID, payload) => {
