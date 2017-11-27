@@ -64,7 +64,7 @@ const handleReceivePostback = (event) => {
   } else {
     sendAPI.sendTextMessage(senderID, "메뉴를 다시 요청하세요");
   }
-};
+
 /*
   if (payload == "led_on") {
     sendAPI.sendTextMessage(senderID, "전구를 켜겠습니다");
