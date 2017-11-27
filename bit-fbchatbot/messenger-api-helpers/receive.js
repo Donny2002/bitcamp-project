@@ -2,7 +2,7 @@ const sendAPI = require('./send');
 const openAPI = require('../rest-api/openapi')
 
 const handleReceiveMessage = (event) => {
-  var senderID = event.sender.id;
+  var senderID = event.sender.id; // 각 user를 구분하는 senderID
   var recipientID = event.recipient.id;
   var timeOfMessage = event.timestamp;
   var message = event.message;
@@ -17,7 +17,7 @@ const handleReceiveMessage = (event) => {
 
   if (messageText == 'help') {
     sendAPI.sendMenuMessage(senderID);
-    
+    console.log('user ======> ', global[senderID].user);
   } else if (messageText.startsWith('searchAddress')) {
     try {
       var arr = messageText.split(':')[1].split('=');
