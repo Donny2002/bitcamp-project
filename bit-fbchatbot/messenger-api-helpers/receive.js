@@ -80,12 +80,12 @@ const menuHelp = (senderID, payload) => {
     global[senderID].menu = 'led'; // 이 사용자의 현재 메뉴는 'LED 스위치' 이다.
 
   } else if (payload == 'menu_calc') {
-    sendAPI.sendTextMessage(senderID, '식을 입력하세요. \n예) 2 + 3');
+    sendAPI.sendTextMessage(senderID, '식을 입력하세요.\n예) 2 + 3');
     global[senderID].menu = 'calc'; // 이 사용자의 현재 메뉴는 '계산기' 이다.
 
   } else if (payload == 'menu_addr') {
     sendAPI.sendAddressSearchMessage(senderID);
-    global[senderID].menu = 'addr'; // 이 사용자의 메뉴는 '주소검색' 이다.
+    global[senderID].menu = 'addr'; // 이 사용자의 현재 메뉴는 '주소검색' 이다.
   }
 };
 
@@ -107,7 +107,7 @@ const menuCalc = (senderID, messageText) => {
 
     var a = parseInt(tokens[0]);
     var op = tokens[1];
-    var b = parseInt(token[2]);
+    var b = parseInt(tokens[2]);
     var result = 0;
     switch (op) {
       case '+':
@@ -130,7 +130,7 @@ const menuCalc = (senderID, messageText) => {
           '+, -, *, /, % 연산자만 사용할 수 있습니다.');
         return;
     }
-    sendAPI.sendTextMessage(senderID, '계산 결과는' + result + '입니다.');
+    sendAPI.sendTextMessage(senderID, '계산 결과는 ' + result + ' 입니다.');
   } catch (exception) {
     sendAPI.sendTextMessage(senderID, '계산식이 맞지 않습니다.\n예)값1 연산자 값2');
   }
