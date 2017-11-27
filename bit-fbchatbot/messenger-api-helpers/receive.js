@@ -50,11 +50,15 @@ const handleReceivePostback = (event) => {
     "at %d", senderID, recipientID, payload, timeOfPostback);
 
 var menu = global[senderID].menu;
+
 if (menu == 'help') {
   menuHelp(senderID, payload);
 } else if (menu == 'led') {
     menuLed(senderID, payload);
+} else if (menu == 'addr') {
+  menuAddr(senderID, payload);
 }
+
 /*
   if (payload == "led_on") {
     sendAPI.sendTextMessage(senderID, "전구를 켜겠습니다");
@@ -116,6 +120,15 @@ const menuCalc = (senderID, messageText) => {
 }
 };
 
+const menuAddr = (senderID, payload) => {
+  if (payload == 'addr_dong') {
+    sendAPI.sendTextMessage(senderID, '동 이름?');
+  } else if (payload == 'addr_road') {
+    sendAPI.sendTextMessage(senderID, '도로명?');
+  } else if (payload == 'addr_post') {
+    sendAPI.sendTextMessage(senderID, '우편번호?');
+  }
+}
 module.exports = {
   handleReceiveMessage,
   handleReceivePostback
