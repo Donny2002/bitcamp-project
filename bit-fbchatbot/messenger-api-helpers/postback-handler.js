@@ -87,15 +87,15 @@ addPostback('/addr', (recipientId) => {
 
 addPostback('add/dong', (recipientId) => {
   sendAPI.sendTextMessage(recipientId, '동 이름?');
-};
+});
 
 addPostback('add/road', (recipientId) => {
   sendAPI.sendTextMessage(recipientId, '도로명?');
-};
+});
 
 addPostback('add/post', (recipientId) => {
   sendAPI.sendTextMessage(recipientId, '우편번호?');
-};
+});
 
 module.exports = {
   getHandler
