@@ -14,39 +14,6 @@ const sendTextMessage = (recipientId, messageText) => {
   api.callMessagesAPI(messageData);
 };
 
-const sendMenuMessage = (recipientId) => {
-  var messageData = {
-    recipient: {
-      id: recipientId
-    },
-    message: {
-      "attachment": {
-        "type": "template",
-        "payload": {
-          "template_type": "button",
-          "text": "메뉴",
-          "buttons": [{
-              "type": "postback",
-              "title": "LED",
-              "payload": "menu_led"
-            },
-            {
-              "type": "postback",
-              "title": "계산기",
-              "payload": "menu_calc"
-            },
-            {
-              "type": "postback",
-              "title": "주소검색",
-              "payload": "menu_addr"
-            }
-          ]
-        }
-      }
-    }
-  };
-  api.callMessagesAPI(messageData);
-};
 
 const sendAddressSearchMessage = (recipientId) => {
   var messageData = {
@@ -135,35 +102,6 @@ const sendButton1Message = (recipientId) => {
   api.callMessagesAPI(messageData);
 };
 
-const sendLedMessage = (recipientId) => {
-  var messageData = {
-    recipient: {
-      id: recipientId
-    },
-    message: {
-      "attachment": {
-        "type": "template",
-        "payload": {
-          "template_type": "button",
-          "text": "LED 스위치!",
-          "buttons": [{
-              "type": "postback",
-              "title": "ON",
-              "payload": "led_on"
-            },
-            {
-              "type": "postback",
-              "title": "OFF",
-              "payload": "led_off"
-            }
-          ]
-        }
-      }
-    }
-  };
-  api.callMessagesAPI(messageData);
-};
-
 const sendButton2Message = (recipientId) => {
   var messageData = {
     recipient: {
@@ -236,7 +174,5 @@ const sendGenericMessage = (recipientId) => {
 
 module.exports = {
   sendTextMessage,
-  sendLedMessage,
-  sendMenuMessage,
   sendAddressSearchMessage
 };
