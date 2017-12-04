@@ -8,7 +8,7 @@ const messageHandler = {
 
 // message를 처리할 함수를 등록한다.
 const addMessage = (message, handler) => {
-  messageHandler[mesaage] = handler;
+  messageHandler[message] = handler;
 }
 
 // 등록된 messageHandler를 찾아서 리턴한다.
