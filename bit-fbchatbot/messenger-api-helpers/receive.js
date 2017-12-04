@@ -1,5 +1,6 @@
 const sendAPI = require('./send');
 const openAPI = require('../rest-api/openapi')
+const messageHandler = require('./message-handler')
 
 const handleReceiveMessage = (event) => {
   var senderID = event.sender.id; // 각 user를 구분하는 senderID
@@ -17,6 +18,15 @@ const handleReceiveMessage = (event) => {
 
   var menu = global[senderID].menu; // 사용자의 현재 메뉴
 
+  var handler = messageHandler.getHandler(messageText);
+
+  if (handler) { // 메세지를 처리할 함수가 있다면,
+    handler(senderID); // 그 함수를 호출한다.
+  } else {
+    sendAPI.sendTextMessage(senderID, '유효한 명령이 아닙니다.');
+  }
+
+/*
   if (messageText == 'help') {
     sendAPI.sendMenuMessage(senderID);
     // 현재 help를 출력한 상태임을 저장한다.
@@ -41,6 +51,7 @@ const handleReceiveMessage = (event) => {
   } else {
     sendAPI.sendTextMessage(senderID, messageText);
   }
+  */
 };
 
 const handleReceivePostback = (event) => {
