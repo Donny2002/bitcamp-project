@@ -17,7 +17,7 @@ const getHandler = (message) => {
 };
 
 // 'help' 메세지를 처리할 함수 등록
-addMessage('help', (recipientID) => {
+addMessage('help', (recipientId) => {
   var messageData = {
     recipient: {
       id: recipientId
