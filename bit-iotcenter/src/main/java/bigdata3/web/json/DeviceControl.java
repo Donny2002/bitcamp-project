@@ -1,7 +1,7 @@
 package bigdata3.web.json;
 
 
-import static bigdata3.web.json.JsonResult.STATE_SUCCESS;
+import static bigdata3.web.json.JsonResult.*;
 
 import java.util.List;
 
