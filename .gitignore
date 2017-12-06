@@ -1,4 +1,4 @@
-
+**/node_modules
 **/.vscode
 **/bin
 **/build
@@ -14,3 +14,4 @@
 **/.env
 **/.settings/
 !build.gradle
+/.metadata/
