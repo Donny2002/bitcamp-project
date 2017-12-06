@@ -2,20 +2,31 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- 
-<mapper namespace="bigdata3.dao.IoTDeviceDao">
-  
+
+<mapper namespace="bigdata3.dao.DeviceDao">
+
   <resultMap type="iotdevice" id="deviceMap">
-    <id column="dno" property="no"/>
-    <result column="sno" property="serialNo"/>
+    <id column="dno" property="deviceNo"/>
+    <result column="sn" property="serialNo"/>
+    <result column="dev_type" property="deviceType"/>
+    <result column="status" property="status"/>
     <result column="uno" property="userNo"/>
   </resultMap>
 
+<!--
   <sql id="select1">
-    select dno, sno, uno 
+    select dno, sn, dev_type, status, uno
     from iot_device
   </sql>
+-->
 
+  <select id="selectListByType" resultMap="deviceMap" parameterType="map">
+    select d.dno, d.sn, d.dev_type, d.status, u.uno
+    from iot_device d left outer join iot_user u on d.uno = u.uno
+    where u.fbuid = #{fbUserId} and d.dev_type = #{deviceType};
+  </select>
+
+<!--
   <select id="selectList" resultMap="deviceMap" parameterType="map">
     <include refid="select1"/>
     <if test="search != null">
@@ -25,32 +36,33 @@
 		      <when test="search == 'uno'">uno = #{value}</when>
 	      </choose>
 	    </where>
-    </if>    
-    order by dno desc 
+    </if>
+    order by dno desc
     limit #{startIndex}, #{pageSize}
   </select>
-  
+
   <select id="selectOne" resultMap="deviceMap" parameterType="string">
-    <include refid="select1"/> 
+    <include refid="select1"/>
     where sno = #{value}
   </select>
-  
-  <insert id="insert" parameterType="iotdevice" 
+
+  <insert id="insert" parameterType="iotdevice"
           useGeneratedKeys="true" keyColumn="dno" keyProperty="no">
-    insert into iot_device(sno) 
+    insert into iot_device(sno)
     values(#{serialNo})
   </insert>
-  
+
   <update id="updateUserNo" parameterType="iotdevice">
-    update iot_device set 
-      uno=#{userNo} 
+    update iot_device set
+      uno=#{userNo}
     where sno=#{serialNo}
   </update>
-  
+
   <delete id="delete" parameterType="string">
-    delete from iot_device 
+    delete from iot_device
     where sno=#{value}
   </delete>
+-->
 
 </mapper>
 
