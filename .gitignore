@@ -15,3 +15,4 @@
 **/.settings/
 !build.gradle
 /.metadata/
+/.recommenders/
