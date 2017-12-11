@@ -9,13 +9,12 @@ import json
 # Custom MQTT message callback
 # AWS IoT 서버에서 메시지를 받았을 때 호출될 함수 정의
 def customCallback(client, userdata, message):
-    print("메시지를 수신하였습니다! \n")
+    print("메시지를 수신하였습니다!")
     print("사서함 이름: ")
     print(message.topic)
     print("메시지 내용: ")
     print(message.payload)
-    print("\n")
-    print("--------------\n")
+    print("--------------\n\n")
 
 
 host = "a1h8rscof81ucx.iot.ap-northeast-2.amazonaws.com"
@@ -49,7 +48,7 @@ myAWSIoTMQTTClient.configureMQTTOperationTimeout(5)  # 5 sec
 
 # AWS IoT에 등록된 Things과 연결
 myAWSIoTMQTTClient.connect()
-print("connect \n")
+print("connect\n")
 
 
 myAWSIoTMQTTClient.subscribe(topic, 1, customCallback)
