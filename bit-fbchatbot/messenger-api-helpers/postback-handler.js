@@ -48,7 +48,7 @@ addPostback('/led', (recipientId) => {
 
 addPostback('/led/on', (recipientId) => {
     sendAPI.sendTextMessage(recipientId, 'LED를 켭니다.')
-    awsIot.publish('dev01', 'topic_1', {
+    awsIoT.publish('dev01', 'topic_1', {
       message: 'led on',
       led: 'on'
     });
@@ -56,7 +56,7 @@ addPostback('/led/on', (recipientId) => {
 
 addPostback('/led/off', (recipientId) => {
     sendAPI.sendTextMessage(recipientId, 'LED를 끕니다.')
-    awsIot.publish('dev01', 'topic_1', {
+    awsIoT.publish('dev01', 'topic_1', {
     message: 'led off',
     led: 'off'
     });
