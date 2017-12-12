@@ -8,7 +8,7 @@ const dev01 = awsIot.device({
   certPath: "/home/ec2-user/vars/aws-iot/dev01/dev01.cert.pem",
     caPath: "/home/ec2-user/vars/aws-iot/root-CA.crt",
   clientId: "client1",
-      host: "a1h8rscof81ucx.iot.ap-northeast-2.amazonaws.com"
+      host: "DEV01_HOST"
 });
 
 dev01.on('connect', function() {
