@@ -13,8 +13,11 @@ def customCallback(client, userdata, message):
     print("사서함 이름: ")
     print(message.topic)
     print("메시지 내용: ")
-    print(message.payload)
-    print("--------------\n\n")
+    #print(message.payload)
+    # 사서함에서 받은 JSON 문자열을 객체로 변환
+    dict = json.loads(message.payload)
+    print(dict['message'])
+    print("--------------")
 
 
 host = "a1h8rscof81ucx.iot.ap-northeast-2.amazonaws.com"
