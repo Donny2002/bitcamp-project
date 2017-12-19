@@ -16,12 +16,16 @@ def updateCallback(payload, responseStatus, token):
 def getCallback(payload, responseStatus, token):
     print("get 명령 수행 결과!")
     # AWSIoT 서버에서 받은 JSON 문자열을 객체로 변환
-    dict = json.loads(message.payload.decode('UTF-8'))
+    dict = json.loads(payload)
 
     if responseStatus == "rejected" and dict['code'] == 404:
         print("Shadow가 존재하지 않습니다.")
+        # shadow 기본값 설정하기
+        myJSONPayload = '{"state":{"desired":{"led":"on"}}}'
+        myDeviceShadow.shadowUpdate(myJSONPayload, updateCallback, 5)
     else:
-        print(dict['state']['desired']['led'])
+        print("현재 Shadow의 값은 다음과 같습니다.")
+        print("led:" + dict['state']['desired']['led'])
     print(token)
     print("--------------")
 
@@ -59,7 +63,3 @@ print("shadow connect\n")
 myDeviceShadow = myShadowClient.createShadowHandlerWithName("dev01", True)
 
 myDeviceShadow.shadowGet(getCallback, 5)
-
-# shadow 값 변경하기
-#myJSONPayload = '{"state":{"desired":{"led":"on"}}}'
-#myDeviceShadow.shadowUpdate(myJSONPayload, updateCallback, 5)
