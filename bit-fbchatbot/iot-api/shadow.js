@@ -20,11 +20,14 @@ thingShadows.on('connect', function() {
   // => Shadow 등록에 성공한다면 설정된 함수가 호출됨
   thingShadows.register('thingName', {}, function() {
     console.log('Shadow에 연결 하였음!');
-
-    // 장비가 준비되면 일단 Shadow 설정된 값을 가져온다.
-    console.log('섀도우에 설정된 값 조회를 요청한다.');
-    thingShadows.get('dev01');
   });
+});
+
+// Thing의 Shadow에 대해 명령을 지시하고 그 명령을 수행한 후에 호출될 함수 등록
+thingShadows.on('status',
+    function(thingName, stat, clientToken, stateObject) {
+        console.log('received '+stat+' on '+thingName+': '+
+                JSON.stringify(stateObject));
 });
 
 // 지정된 타임아웃 시간이 경과했을 때 호출될 함수 등록
