@@ -38,7 +38,7 @@ thingShadows.on('timeout',
   });
 
 function update(desiredState) {
-  thingShadows.update('thingName', {
+  thingShadows.update(thingName, {
     state: {
       desired: desiredState
     }
