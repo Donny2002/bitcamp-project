@@ -34,10 +34,8 @@ myShadowClient = AWSIoTMQTTShadowClient(clientId)
 myShadowClient.configureEndpoint(host, 8883)
 myShadowClient.configureCredentials(rootCAPath, privateKeyPath, certificatePath)
 
-# AWSIoTMQTTClient 연결에 대한 제어 정보 설정
+# AWSIoTMQTTShadowClient 연결에 대한 제어 정보 설정
 myShadowClient.configureAutoReconnectBackoffTime(1, 32, 20)
-myShadowClient.configureOfflinePublishQueueing(-1)  # Infinite offline Publish queueing
-myShadowClient.configureDrainingFrequency(2)  # Draining: 2 Hz
 myShadowClient.configureConnectDisconnectTimeout(10)  # 10 sec
 myShadowClient.configureMQTTOperationTimeout(5)  # 5 sec
 
