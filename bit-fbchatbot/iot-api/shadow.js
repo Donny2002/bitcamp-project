@@ -18,7 +18,7 @@ thingShadows.on('connect', function() {
 
   // 지정한 Thing에 대해 Shadow 연결을 요청한다.
   // => Shadow 등록에 성공한다면 설정된 함수가 호출됨
-  thingShadows.register('thingName', {}, function() {
+  thingShadows.register(thingName, {}, function() {
     console.log('Shadow에 연결 하였음!');
   });
 });
