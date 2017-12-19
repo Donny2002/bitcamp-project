@@ -5,11 +5,11 @@ const thingName = 'dev01';
 
 // AWS IoT 서버에 등록된 Thing 정보를 바탕으로 Shadow 제어 장비를 준비시킨다.
 var thingShadows = awsIot.thingShadow({
-  keyPath: "dev01.private.key", // 개인키 파일
-  certPath: "dev01.cert.pem", // 인증서 파일
-  caPath: "root-CA.crt", // 인증서를 발행한 회사에 대한 인증서
-  clientId: "donnybot", // Id는 본인이 정함
-  host: "a1h8rscof81ucx.iot.ap-northeast-2.amazonaws.com"
+     keyPath: "/home/ec2-user/vars/aws-iot/dev01/dev01.private.key",
+    certPath: "/home/ec2-user/vars/aws-iot/dev01/dev01.cert.pem",
+      caPath: "/home/ec2-user/vars/aws-iot/root-CA.crt",
+    clientId: "DonnyBot",
+        host: process.env.DEV01_HOST
 });
 
 // Thing의 Shadow 제어 장비가 준비되었을 때 호출될 함수 등록

@@ -7,7 +7,7 @@ const dev01 = awsIot.device({
    keyPath: "/home/ec2-user/vars/aws-iot/dev01/dev01.private.key",
   certPath: "/home/ec2-user/vars/aws-iot/dev01/dev01.cert.pem",
     caPath: "/home/ec2-user/vars/aws-iot/root-CA.crt",
-  clientId: "client1",
+  clientId: "DonnyBot",
       host: process.env.DEV01_HOST
 });
 
